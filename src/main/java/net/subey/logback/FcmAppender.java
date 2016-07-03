@@ -30,12 +30,10 @@ public class FcmAppender extends AppenderBase<LoggingEvent> {
         msg.setMessage_id(msgId + "-" + count.incrementAndGet());
         msg.setTo(getTo());
         msg.setDelivery_receipt_requested(null);
-        msg.setTime_to_live(600);
         msg.setNotification(new FcmNotification(getTitle() , body, "alert_dark_frame"));
 
         Gson gson = new Gson();
-
-        System.out.println(gson.toJson(msg));
+        //System.out.println(gson.toJson(msg));
 
         HttpResponse<JsonNode> jsonResponse = Unirest.post("https://fcm.googleapis.com/fcm/send")
                 .header("Content-Type", "application/json")
@@ -51,7 +49,7 @@ public class FcmAppender extends AppenderBase<LoggingEvent> {
         if (evaluate(eventObject)) {
             try {
                 String msgId = String.valueOf(eventObject.getContextBirthTime());
-                String message = encoder.getLayout().doLayout(eventObject);
+                //String message = encoder.getLayout().doLayout(eventObject);
                 sendFcm(eventObject.getFormattedMessage(), msgId);
             } catch (UnirestException e) {
                 addError(e.getMessage());

@@ -1,5 +1,8 @@
 package net.subey.logback;
 
+/**
+ * @link https://firebase.google.com/docs/cloud-messaging/http-server-ref#notification-payload-support
+ */
 public class FcmNotification {
     private String title;
     private String text;
